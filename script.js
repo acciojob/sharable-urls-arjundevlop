@@ -1,11 +1,28 @@
 // your code here
 
-	document.getElementById("button").addEventListener("click", function(){
-		var inputNameValue = document.getElementById("name").value;
-		var inputYearValue = document.getElementById("year").value;
-		if(inputNameValue!="" && inputYearValue!="")
-		{
-			document.getElementById("url").innerHTML = "https://localhost:8080/?name="+ inputNameValue+"&year="+inputYearValue;
-		}
-		
-	});
+	var form = document.querySelector("form");
+var h3 = document.querySelector("h3");
+var nameElement = document.querySelector("#name");
+var yearElement = document.querySelector("#year");
+var btn = document.querySelector("#button");
+
+function handleSubmit(event){
+	event.preventDefault();
+	var h3Value = "https://localhost:8080/";
+	var name = nameElement.value;
+	var year = yearElement.value;
+	if(name && year)
+	{
+		h3Value += "?name="+ name +"&year="+year;
+	}
+	else if(name && !year)
+	{
+		h3Value+= "?name="+ name;
+	}
+	else if(!name && year)
+	{
+		h3Value+= "?year=" + year;
+	}
+	h3.textContent = h3Value;
+}
+form.addEventListener("submit", handleSubmit);
